@@ -1,5 +1,5 @@
 (*
- * Copyright (c) 2015 Magnus Skjegstad <magnus@skjegstad.com>
+ * Copyright (c) 2016 Martin Lucina <martin@lucina.net>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -14,23 +14,6 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  *)
-
-type t
-
-(** Read boot parameter line and store in assoc list.
-    Expected format is ["key1=val1 key2=val2"]. *)
-val create : unit -> [`Ok of t | `Error of string] Lwt.t
-
-(** Get boot parameter. Returns [None] if the parameter is not found. *)
-val get : t -> string -> string option
-
-(** Get boot parameter. Raises [Parameter_not_found s] if the parameter is not found. *)
-val get_exn : t -> string -> string
-
-exception Parameter_not_found of string
-
-(** Returns the assoc list of key and values. *)
-val parameters : t -> (string * string) list
 
 (** Return an argv-like structure. *)
 val argv : unit -> [`Ok of string array | `Error of string] Lwt.t

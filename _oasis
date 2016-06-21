@@ -1,8 +1,8 @@
 OASISFormat: 0.4
 Name:        mirage-bootvar-solo5
-Version:     0.3.1
+Version:     0.0.1
 Synopsis:    Library for reading MirageOS unikernel boot parameters in Solo5
-Authors:     Magnus Skjegstad
+Authors:     Martin Lucina
 License:     ISC
 Plugins:     META (0.3), DevFiles (0.3)
 BuildTools:  ocamlbuild
@@ -10,5 +10,5 @@ BuildTools:  ocamlbuild
 Library "mirage-bootvar"
   Path:              lib/
   Findlibname:       mirage-bootvar
-  BuildDepends:      lwt, mirage-solo5, re, re.str
-  Modules:           Bootvar
+  BuildDepends:      lwt, mirage-solo5, astring
+  Modules:           Bootvar, Parse_argv
