@@ -1,5 +1,5 @@
 (*
- * Copyright (c) 2014-2015 Magnus Skjegstad <magnus@skjegstad.com>
+ * Copyright (c) 2016 Martin Lucina <martin.lucina@docker.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -14,69 +14,14 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  *)
-open Lwt
-
-type t = { cmd_line : string;
-           parameters : (string * string) list }
-
-exception Parameter_not_found of string
-
-let get_cmd_line () =
-  Lwt.return ""
-  (* Originally based on mirage-skeleton/xen/static_website+ip code for reading
-   * boot parameters, but we now read from xenstore for better ARM
-   * compatibility.  *)
-(*
-  OS.Xs.make () >>= fun client ->
-  Lwt.catch (fun () ->
-    OS.Xs.(immediate client (fun x -> read x "vm")) >>= fun vm ->
-    OS.Xs.(immediate client (fun x -> read x (vm^"/image/cmdline"))))
-    (fun _ ->
-       let cmdline = (OS.Start_info.get ()).OS.Start_info.cmd_line in
-       Lwt.return cmdline)
-*)
-let create () = 
-  get_cmd_line () >>= fun cmd_line ->
-  let entries = Re_str.(split (regexp_string " ") cmd_line) in
-  let parameters =
-    List.map (fun x ->
-        match Re_str.(split (regexp_string "=") x) with 
-        | [a;b] -> (a,b)
-        | _ -> raise (Failure (Printf.sprintf "Malformed boot parameter %S" x))
-      ) entries
-  in
-  let t = 
-    try 
-      `Ok { cmd_line; parameters}
-    with 
-      Failure msg -> `Error msg
-  in
-  return t
-
-let get_exn t parameter = 
-  try
-    List.assoc parameter t.parameters
-  with
-    Not_found -> raise (Parameter_not_found parameter)
-
-let get t parameter =
-  try
-    Some (List.assoc parameter t.parameters)
-  with
-    Not_found -> None
-
-let parameters x = x.parameters
-
-let to_argv x =
-  let argv = Array.make (1 + List.length x) "" in
-  let f i (k,v) =
-    let dash = if String.length k = 1 then "-" else "--" in
-    argv.(i + 1) <- Printf.sprintf "%s%s=%s" dash k v
-  in
-  List.iteri f x ;
-  argv
+external get_cmd_line : unit -> string = "caml_get_cmdline"
 
 let argv () =
-  create () >|= function
-  | `Ok t -> `Ok (to_argv @@ parameters t)
-  | `Error s -> `Error s
+  let cmd_line = get_cmd_line () in
+  let entries = Parse_argv.parse cmd_line in
+  let result =
+      match entries with
+      | `Ok l -> `Ok (Array.of_list ("mirage" :: l))
+      | `Error s -> `Error s
+  in
+  Lwt.return result
