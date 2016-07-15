@@ -1,6 +1,6 @@
 # OASIS_START
-# DO NOT EDIT (digest: 54ac7d7dceb05f0d9dd4c492ffc7730c)
-version = "0.0.1"
+# DO NOT EDIT (digest: a52a2082549d8f140ac18a44cdf78eb4)
+version = "0.1.1"
 description =
 "Library for reading MirageOS unikernel boot parameters in Solo5"
 requires = "lwt mirage-solo5 astring"
