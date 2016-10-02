@@ -16,4 +16,4 @@
  *)
 
 (** Return an argv-like structure. *)
-val argv : unit -> [`Ok of string array | `Error of string] Lwt.t
+val argv : unit -> string array Lwt.t
