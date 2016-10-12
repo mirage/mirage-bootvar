@@ -1,9 +1,9 @@
 # OASIS_START
-# DO NOT EDIT (digest: a52a2082549d8f140ac18a44cdf78eb4)
+# DO NOT EDIT (digest: 503832fe0c0f0abcd1648b96ac9bdbc4)
 version = "0.1.1"
 description =
 "Library for reading MirageOS unikernel boot parameters in Solo5"
-requires = "lwt mirage-solo5 astring"
+requires = "lwt mirage-solo5 parse-argv"
 archive(byte) = "mirage-bootvar.cma"
 archive(byte, plugin) = "mirage-bootvar.cma"
 archive(native) = "mirage-bootvar.cmxa"
