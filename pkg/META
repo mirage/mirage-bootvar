@@ -1,0 +1,7 @@
+description = "argv parser library"
+version = "%%VERSION%%"
+requires = "astring"
+archive(byte) = "parse-argv.cma"
+archive(native) = "parse-argv.cmxa"
+plugin(byte) = "parse-argv.cma"
+plugin(native) = "parse-argv.cmxs"

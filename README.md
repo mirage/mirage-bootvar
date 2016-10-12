@@ -1,0 +1,1 @@
+Common code for parsing argv strings.  This common code was factored out of [mirage-bootvar-xen](https://github.com/mirage/mirage-bootvar-xen) and [mirage-bootvar-solo5](https://github.com/mirage/mirage-bootvar-solo5).

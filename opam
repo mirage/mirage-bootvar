@@ -1,0 +1,23 @@
+opam-version: "1.2"
+name:         "parse-argv"
+maintainer:   ["Mindy Preston <mindy.preston@docker.com>"]
+authors:      ["Magnus Skjegstad" "Mindy Preston"]
+homepage:     "https://github.com/mirage/parse-argv"
+bug-reports:  "https://github.com/mirage/parse-argv/issues"
+homepage:     "https://github.com/mirage/parse-argv.git"
+tags:         [ "org:mirage"]
+doc:          "https://docs.mirage.io"
+
+build: ["ocaml" "pkg/pkg.ml" "build"]
+build-test: [
+  [ "ocaml" "pkg/pkg.ml" "build" "--tests" "true" ]
+  [ "ocaml" "pkg/pkg.ml" "test" ]
+]
+
+depends: [
+  "ocamlbuild" {build}
+  "ocamlfind" {build}
+  "topkg"     {build}
+  "astring"
+]
+available: [ocaml-version >= "4.02.3"]

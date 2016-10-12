@@ -1,0 +1,6 @@
+true : bin_annot, safe_string, keep_locs
+true : warn(A)
+
+<lib> : include
+<lib/*> : package(astring)
+<lib_test/*> : package(oUnit, astring)

@@ -1,6 +1,6 @@
 (*
  * Copyright (c) 2016 Citrix Systems Inc
- * 
+ *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
  * copyright notice and this permission notice appear in all copies.
@@ -19,6 +19,8 @@ open Astring
 
 (* Split string into whitespace-separated substrings,
    taking into account quoting *)
+
+type error = [ `Msg of string ]
 
 let parse s =
   let skip_white s = String.Sub.drop
@@ -51,17 +53,17 @@ let parse s =
             let so_far' = String.(sub (of_char c)) :: data :: so_far in
             inner in_quoted (String.Sub.tail rem) so_far' acc
           | None ->
-            `Error "Invalid escaping at end of string"
+            Error "Invalid escaping at end of string"
         end
       | Some c ->
         let e = Printf.sprintf "Something went wrong in the argv parser: Matched '%c'" c in
-        `Error e
+        Error e
       | None ->
         let so_far = List.rev (data :: so_far) in
-        `Ok (List.map (String.Sub.to_string) (List.rev ((String.Sub.concat so_far) :: acc)))
+        Ok (List.map (String.Sub.to_string) (List.rev ((String.Sub.concat so_far) :: acc)))
     in
     inner false s [] []
   in
   match split (String.sub s |> skip_white) with
-  | `Ok s -> `Ok (List.filter (fun s -> String.length s > 0) s)
-  | `Error _ as e -> e
+  | Ok s -> Ok (List.filter (fun s -> String.length s > 0) s)
+  | Error s -> Error (`Msg s)
