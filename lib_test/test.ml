@@ -37,7 +37,7 @@ let test_parse () =
   List.iter (fun (input, expected) ->
     log "checking '%s'" input;
     match Parse_argv.parse input with
-    | Error (`Msg e) ->
+    | Error e ->
       Printf.eprintf "Error - failed to parse: %s (input %s) " e input
     | Ok l ->
       if l <> expected

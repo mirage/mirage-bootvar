@@ -20,8 +20,6 @@ open Astring
 (* Split string into whitespace-separated substrings,
    taking into account quoting *)
 
-type error = [ `Msg of string ]
-
 let parse s =
   let skip_white s = String.Sub.drop
       ~max:Sys.max_string_length
@@ -65,5 +63,5 @@ let parse s =
     inner false s [] []
   in
   match split (String.sub s |> skip_white) with
+  | Error s -> Error s
   | Ok s -> Ok (List.filter (fun s -> String.length s > 0) s)
-  | Error s -> Error (`Msg s)

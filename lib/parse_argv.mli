@@ -1,2 +1,1 @@
-type error = [ `Msg of string ]
-val parse : string -> (string list, error) result
+val parse : string -> (string list, string) result
