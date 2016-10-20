@@ -19,6 +19,7 @@ depends: [
   "ocamlfind" {build}
   "topkg"     {build}
   "ounit"     {test}
+  "result"
   "astring"
 ]
 available: [ocaml-version >= "4.02.3"]
