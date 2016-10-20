@@ -18,7 +18,6 @@ external get_cmd_line : unit -> string = "caml_get_cmdline"
 
 let argv () =
   let cmd_line = get_cmd_line () in
-  let entries = Parse_argv.parse cmd_line in
-  match entries with
-  | `Ok l -> Lwt.return (Array.of_list ("mirage" :: l))
-  | `Error s -> Lwt.fail_with s
+  match Parse_argv.parse cmd_line with
+  | Ok l -> Lwt.return (Array.of_list ("mirage" :: l))
+  | Error s -> Lwt.fail_with s
