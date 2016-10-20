@@ -1,3 +1,8 @@
+0.0.2
+=====
+
+* support OCaml versoin 4.02.3 in addition to 4.03.0
+
 0.0.1
 =====
 
