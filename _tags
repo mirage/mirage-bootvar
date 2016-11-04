@@ -1,4 +1,4 @@
-true : bin_annot, safe_string, keep_locs
+true : bin_annot, safe_string, keep_locs, debug
 true : warn(A)
 
 <lib> : include
