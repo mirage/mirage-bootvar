@@ -1,5 +1,5 @@
 description = "argv parser library"
-version = "%%VERSION%%"
+version = "%%VERSION_NUM%%"
 requires = "astring result"
 archive(byte) = "parse-argv.cma"
 archive(native) = "parse-argv.cmxa"
