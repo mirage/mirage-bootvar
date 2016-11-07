@@ -9,5 +9,4 @@
 *.cmxa
 
 _build
-setup.data
-setup.log
+*.install

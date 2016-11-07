@@ -1,0 +1,9 @@
+description = "Library for reading MirageOS unikernel boot parameters in Solo5"
+version = "%%VERSION_NUM%%"
+requires = "lwt mirage-solo5 parse-argv"
+archive(byte) = "mirage-bootvar-solo5.cma"
+archive(native) = "mirage-bootvar-solo5.cmxa"
+plugin(byte) = "mirage-bootvar-solo5.cma"
+plugin(native) = "mirage-bootvar-solo5.cmxs"
+exists_if = "mirage-bootvar-solo5.cma"
+
