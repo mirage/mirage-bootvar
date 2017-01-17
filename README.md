@@ -1,4 +1,4 @@
-# Bootvar
+# mirage-bootvar-solo5 -- Solo5 implementation of MirageOS Bootvar interface
 
 Library for passing boot parameters from Solo5 to MirageOS.
 
