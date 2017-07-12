@@ -1,0 +1,10 @@
+B ../_build/default/lib
+B ../_build/default/lib_test
+FLG -w -40
+PKG astring
+PKG bytes
+PKG oUnit
+PKG oUnit.advanced
+PKG result
+PKG unix
+S ../lib
