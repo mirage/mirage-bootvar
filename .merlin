@@ -1,4 +1,0 @@
-PKG topkg astring
-S lib
-S lib_test
-B _build/**
