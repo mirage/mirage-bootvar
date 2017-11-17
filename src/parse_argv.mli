@@ -14,6 +14,6 @@
 
 (** Module to parse a Unix-style argv into a list of strings *)
 
-val parse : string -> (string list, string) Result.result
+val parse : string -> (string list, string) result
 (** [parse t] will split the [t] string into whitespace-separated substrings,
    taking into account quoting using the backslash character. *)

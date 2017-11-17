@@ -15,7 +15,6 @@
  *
  *)
 
-open Result
 open Astring
 
 (* Split string into whitespace-separated substrings,
