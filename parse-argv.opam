@@ -20,6 +20,5 @@ depends: [
   "jbuilder" {build & >="1.0+beta10"}
   "ounit"     {test}
   "astring"
-  "result"
 ]
-available: [ocaml-version >= "4.02.3"]
+available: [ocaml-version >= "4.04.2"]
