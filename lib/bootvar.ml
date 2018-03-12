@@ -14,7 +14,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  *)
-external get_cmd_line : unit -> string = "caml_get_cmdline"
+external get_cmd_line : unit -> string = "mirage_solo5_get_cmdline"
 
 let argv () =
   let cmd_line = get_cmd_line () in
