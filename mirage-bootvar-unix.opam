@@ -1,0 +1,23 @@
+opam-version: "1.2"
+maintainer:   ["hannes@mehnert.org"]
+homepage:     "https://github.com/mirage/mirage-bootvar-unix"
+bug-reports:  "https://github.com/mirage/mirage-bootvar-unix/issues/"
+dev-repo:     "https://github.com/mirage/mirage-bootvar-unix.git"
+license:      "ISC"
+authors: [
+  "Hannes Mehnert <hannes@mehnert.org>"
+]
+tags: [
+  "org:mirage"
+]
+build: [
+  ["dune" "subst"]{pinned}
+  ["dune" "build" "-p" name "-j" jobs]
+]
+
+depends: [
+  "dune" {build}
+  "lwt"
+  "parse-argv"
+]
+available: [ ocaml-version >= "4.04.2" ]
