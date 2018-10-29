@@ -21,3 +21,7 @@ depends: [
   "parse-argv"
   "ocaml" {>= "4.04.2"}
 ]
+synopsis: "Unix implementation of MirageOS Bootvar interface"
+description: """
+Library for passing boot parameters from Solo5 to MirageOS.
+"""
