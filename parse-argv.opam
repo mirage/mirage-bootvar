@@ -8,13 +8,13 @@ doc: "https://docs.mirage.io"
 bug-reports: "https://github.com/mirage/parse-argv/issues"
 depends: [
   "ocaml" {>= "4.04.2"}
-  "jbuilder" {build & >= "1.0+beta10"}
+  "dune" {build & >= "1.0"}
   "ounit" {with-test}
   "astring"
 ]
 build: [
-  ["jbuilder" "subst"] {pinned}
-  ["jbuilder" "build" "-p" name "-j" jobs]
-  ["jbuilder" "runtest"] {with-test}
+  ["dune" "subst"] {pinned}
+  ["dune" "build" "-p" name "-j" jobs]
+  ["dune" "runtest" "-p" name "-j" jobs] {with-test}
 ]
 dev-repo: "git+https://github.com/mirage/parse-argv.git"
