@@ -18,3 +18,7 @@ build: [
   ["dune" "runtest" "-p" name "-j" jobs] {with-test}
 ]
 dev-repo: "git+https://github.com/mirage/parse-argv.git"
+synopsis: "Process strings into sets of command-line arguments"
+description: """
+parse-argv is a small implementation of a simple argv parser.
+"""
