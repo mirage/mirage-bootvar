@@ -1,5 +1,0 @@
-true: bin_annot, safe_string, principal
-true: warn(A-44)
-
-<lib> : include
-<lib/*>: package(lwt parse-argv mirage-solo5)
