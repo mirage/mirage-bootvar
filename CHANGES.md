@@ -1,3 +1,9 @@
+## v0.2.0 (2019-03-29)
+
+* port to dune (#7 @hannesm)
+* do not use the Result module any more (#5 @hannesm)
+* update to opam 2 metadata (#7 @hannesm)
+
 ## v0.1.0
 
 * Port to Jbuilder

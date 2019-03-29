@@ -4,7 +4,7 @@ maintainer: "Mindy Preston <mindy.preston@docker.com>"
 authors: ["Jon Ludlam" "Magnus Skjegstad" "Mindy Preston"]
 tags: "org:mirage"
 homepage: "https://github.com/mirage/parse-argv"
-doc: "https://docs.mirage.io"
+doc: "https://mirage.github.io/parse-argv/"
 bug-reports: "https://github.com/mirage/parse-argv/issues"
 depends: [
   "ocaml" {>= "4.04.2"}
