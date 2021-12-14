@@ -14,12 +14,12 @@ tags: [
   "org:mirage"
 ]
 build: [
-  ["dune" "subst"] {pinned}
+  ["dune" "subst"] {dev}
   ["dune" "build" "-p" name "-j" jobs]
   ["dune" "runtest" "-p" name] {with-test}
 ]
 depends: [
-  "ocaml" {>= "4.04.2"}
+  "ocaml" {>= "4.08.0"}
   "dune" {>= "1.0"}
   "mirage-solo5" {>= "0.6.0" & < "0.7.0"}
   "lwt"
