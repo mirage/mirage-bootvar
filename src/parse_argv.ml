@@ -15,53 +15,39 @@
  *
  *)
 
-open Astring
-
 (* Split string into whitespace-separated substrings,
    taking into account quoting *)
 
+type state =
+  | Quoted_escaped
+  | Quoted
+  | Escaped
+  | Normal
+
+let chars_to_str = function
+  | [] -> []
+  | chars ->
+    let chars = List.rev chars in
+    [ String.init (List.length chars) (List.nth chars) ]
+
 let parse s =
-  let skip_white s = String.Sub.drop
-      ~max:Sys.max_string_length
-      ~sat:Char.Ascii.is_white s in
-
-  let split s =
-    let rec inner in_quoted s so_far acc =
-      let is_data = function
-        | '\\' -> false
-        | '"' -> false
-        | c when Char.Ascii.is_white c -> in_quoted
-        | _ -> true in
-
-      let data,rem = String.Sub.span
-          ~sat:is_data
-          ~max:Sys.max_string_length s in
-
-      match String.Sub.head rem with
-      | Some c when Char.Ascii.is_white c ->
-        let so_far = List.rev (data :: so_far) in
-        inner in_quoted (skip_white rem) [] ((String.Sub.concat so_far)::acc)
-      | Some '"' ->
-        let so_far = data :: so_far in
-        inner (not in_quoted) (String.Sub.tail rem) so_far acc
-      | Some '\\' ->
-        let rem = String.Sub.tail rem in
-        begin match String.Sub.head rem with
-          | Some c ->
-            let so_far' = String.(sub (of_char c)) :: data :: so_far in
-            inner in_quoted (String.Sub.tail rem) so_far' acc
-          | None ->
-            Error "Invalid escaping at end of string"
-        end
-      | Some c ->
-        let e = Printf.sprintf "Something went wrong in the argv parser: Matched '%c'" c in
-        Error e
-      | None ->
-        let so_far = List.rev (data :: so_far) in
-        Ok (List.map (String.Sub.to_string) (List.rev ((String.Sub.concat so_far) :: acc)))
-    in
-    inner false s [] []
+  let l = String.length s in
+  let rec loop acc curr state idx =
+    if idx = l then
+      if state = Normal then
+        Ok (List.rev (chars_to_str curr @ acc))
+      else
+        Error "bad input line - either escaped or quoted or both"
+    else
+      match state, String.unsafe_get s idx with
+      | Normal, ' ' -> loop (chars_to_str curr @ acc) [] state (idx + 1)
+      | Escaped, c -> loop acc (c :: curr) Normal (idx + 1)
+      | Quoted_escaped, c -> loop acc (c :: curr) Quoted (idx + 1)
+      | Quoted, '\\' -> loop acc curr Quoted_escaped (idx + 1)
+      | Quoted, '"' -> loop acc curr Normal (idx + 1)
+      | Quoted, c -> loop acc (c :: curr) Quoted (idx + 1)
+      | Normal, '\\' -> loop acc curr Escaped (idx + 1)
+      | Normal, '"' -> loop acc curr Quoted (idx + 1)
+      | Normal, c -> loop acc (c :: curr) Normal (idx + 1)
   in
-  match split (String.sub s |> skip_white) with
-  | Error s -> Error s
-  | Ok s -> Ok (List.filter (fun s -> String.length s > 0) s)
+  loop [] [] Normal 0

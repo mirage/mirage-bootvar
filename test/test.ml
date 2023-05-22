@@ -23,10 +23,12 @@ let log = Printf.ksprintf (fun s -> if !verbose then Printf.fprintf stdout "%s\n
 
 let tests =
   [ "foo bar baz", ["foo"; "bar"; "baz"];
-    "foo \"bar\" baz", ["foo"; "bar"; "baz"];
-    "f\\\ oo b\\\"r baz", ["f oo"; "b\"r"; "baz"];
-    "foo bar\"bie\"boo baz", ["foo"; "barbieboo"; "baz"];
-    "  ", []
+    {|foo "bar" baz|}, ["foo"; "bar"; "baz"];
+    {|f\ oo b\"r baz|}, ["f oo"; "b\"r"; "baz"];
+    {|foo bar"bie"boo baz|}, ["foo"; "barbieboo"; "baz"];
+    {|foo "bar baz"|}, ["foo"; "bar baz"];
+    {|foo bar\ baz|}, ["foo"; "bar baz"];
+    "  ", [];
   ]
 
 let test_parse () =
