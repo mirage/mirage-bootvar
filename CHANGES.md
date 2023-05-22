@@ -1,3 +1,8 @@
+## v0.3.0 (2023-05-22)
+
+* remove build directive on dune dependency (#8 @CraigFE)
+* remove astring dependency, simplify code (#10 @hannesm)
+
 ## v0.2.0 (2019-03-29)
 
 * port to dune (#7 @hannesm)
