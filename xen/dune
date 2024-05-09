@@ -4,4 +4,3 @@
  (libraries mirage-bootvar.parse-argv mirage-xen)
  (implements mirage_bootvar)
  (optional))
-

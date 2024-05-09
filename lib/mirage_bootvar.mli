@@ -15,5 +15,5 @@
  *
  *)
 
-(** Return an argv-like structure. *)
 val argv : unit -> string array
+(** Return an argv-like structure. *)

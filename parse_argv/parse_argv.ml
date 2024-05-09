@@ -18,28 +18,22 @@
 (* Split string into whitespace-separated substrings,
    taking into account quoting *)
 
-type state =
-  | Quoted_escaped
-  | Quoted
-  | Escaped
-  | Normal
+type state = Quoted_escaped | Quoted | Escaped | Normal
 
 let chars_to_str = function
   | [] -> []
   | chars ->
-    let chars = List.rev chars in
-    [ String.init (List.length chars) (List.nth chars) ]
+      let chars = List.rev chars in
+      [ String.init (List.length chars) (List.nth chars) ]
 
 let parse s =
   let l = String.length s in
   let rec loop acc curr state idx =
     if idx = l then
-      if state = Normal then
-        Ok (List.rev (chars_to_str curr @ acc))
-      else
-        Error "bad input line - either escaped or quoted or both"
+      if state = Normal then Ok (List.rev (chars_to_str curr @ acc))
+      else Error "bad input line - either escaped or quoted or both"
     else
-      match state, String.unsafe_get s idx with
+      match (state, String.unsafe_get s idx) with
       | Normal, ' ' -> loop (chars_to_str curr @ acc) [] state (idx + 1)
       | Escaped, c -> loop acc (c :: curr) Normal (idx + 1)
       | Quoted_escaped, c -> loop acc (c :: curr) Quoted (idx + 1)
