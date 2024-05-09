@@ -1,9 +1,5 @@
 (*
-<<<<<<<< HEAD:unix/bootvar.ml
- * Copyright (c) 2018 Hannes Mehnert <hannes@mehnert.org>
-========
- * Copyright (c) 2016 Martin Lucina <martin@lucina.net>
->>>>>>>> solo5/main:solo5/bootvar.mli
+ * Copyright (c) mirage-bootvar AUTHORS
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -19,13 +15,8 @@
  *
  *)
 
-<<<<<<<< HEAD:unix/bootvar.ml
 let argv () =
   let cmd_line = Array.fold_left (fun x arg -> x ^ " " ^ arg) "" Sys.argv in
   match Parse_argv.parse cmd_line with
-  | Ok l -> Lwt.return (Array.of_list l)
-  | Error s -> Lwt.fail_with s
-========
-(** Return an argv-like structure. *)
-val argv : unit -> string array Lwt.t
->>>>>>>> solo5/main:solo5/bootvar.mli
+  | Ok l -> Array.of_list l
+  | Error s -> failwith s

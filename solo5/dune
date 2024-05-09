@@ -1,4 +1,6 @@
 (library
-  (name bootvar)
-  (public_name mirage-bootvar-solo5)
-  (libraries lwt mirage-solo5 parse-argv))
+ (name mirage_bootvar_solo5)
+ (public_name mirage-bootvar.solo5)
+ (libraries mirage-bootvar.parse-argv mirage-solo5)
+ (implements mirage-bootvar)
+ (optional))

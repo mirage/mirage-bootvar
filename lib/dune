@@ -1,0 +1,5 @@
+(library
+ (name mirage_bootvar)
+ (public_name mirage-bootvar)
+ (virtual_modules mirage_bootvar)
+ (default_implementation mirage-bootvar.unix))

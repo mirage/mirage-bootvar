@@ -1,5 +1,5 @@
 (*
- * Copyright (c) 2016 Martin Lucina <martin.lucina@docker.com>
+ * Copyright (c) 2016 mirage-bootvar AUTHORS
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -14,10 +14,6 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  *)
-external get_cmd_line : unit -> string = "mirage_solo5_get_cmdline"
 
-let argv () =
-  let cmd_line = get_cmd_line () in
-  match Parse_argv.parse cmd_line with
-  | Ok l -> Lwt.return (Array.of_list ("mirage" :: l))
-  | Error s -> Lwt.fail_with s
+(** Return an argv-like structure. *)
+val argv : unit -> string array
