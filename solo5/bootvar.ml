@@ -1,9 +1,5 @@
 (*
-<<<<<<<< HEAD:unix/bootvar.ml
- * Copyright (c) 2018 Hannes Mehnert <hannes@mehnert.org>
-========
- * Copyright (c) 2016 Martin Lucina <martin@lucina.net>
->>>>>>>> solo5/main:solo5/bootvar.mli
+ * Copyright (c) 2016 Martin Lucina <martin.lucina@docker.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -18,14 +14,10 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  *)
+external get_cmd_line : unit -> string = "mirage_solo5_get_cmdline"
 
-<<<<<<<< HEAD:unix/bootvar.ml
 let argv () =
-  let cmd_line = Array.fold_left (fun x arg -> x ^ " " ^ arg) "" Sys.argv in
+  let cmd_line = get_cmd_line () in
   match Parse_argv.parse cmd_line with
-  | Ok l -> Lwt.return (Array.of_list l)
+  | Ok l -> Lwt.return (Array.of_list ("mirage" :: l))
   | Error s -> Lwt.fail_with s
-========
-(** Return an argv-like structure. *)
-val argv : unit -> string array Lwt.t
->>>>>>>> solo5/main:solo5/bootvar.mli
