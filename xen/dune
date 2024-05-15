@@ -1,6 +1,6 @@
 (library
  (name mirage_bootvar_xen)
  (public_name mirage-bootvar.xen)
- (libraries mirage-bootvar.parse-argv mirage-xen)
- (implements mirage_bootvar)
+ (libraries mirage-xen)
+ (implements backend)
  (optional))

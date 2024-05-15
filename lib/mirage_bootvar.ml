@@ -1,5 +1,5 @@
 (*
- * Copyright (c) mirage-bootvar AUTHORS
+ * Copyright (c) 2016 mirage-bootvar AUTHORS
  *
  * Permission to use, copy, modify, and distribute this software for any
  * purpose with or without fee is hereby granted, provided that the above
@@ -16,7 +16,6 @@
  *)
 
 let argv () =
-  let cmd_line = Array.fold_left (fun x arg -> x ^ " " ^ arg) "" Sys.argv in
-  match Parse_argv.parse cmd_line with
-  | Ok l -> Array.of_list l
+  match Parse_argv.parse (Backend.cmd_line ()) with
+  | Ok l -> Array.of_list ("mirage" :: l)
   | Error s -> failwith s

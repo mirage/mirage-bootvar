@@ -14,10 +14,4 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  *
  *)
-external get_cmd_line : unit -> string = "mirage_xen_get_cmdline"
-
-let argv () =
-  let cmd_line = get_cmd_line () in
-  match Parse_argv.parse cmd_line with
-  | Ok l -> Array.of_list ("mirage" :: l)
-  | Error s -> failwith s
+external cmd_line : unit -> string = "mirage_xen_get_cmdline"
