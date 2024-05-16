@@ -1,5 +1,12 @@
 (library
  (name mirage_bootvar)
  (public_name mirage-bootvar)
- (virtual_modules mirage_bootvar)
- (default_implementation mirage-bootvar.unix))
+ (modules mirage_bootvar)
+ (libraries mirage-bootvar.parse-argv mirage-bootvar.backend))
+
+(library
+ (name backend)
+ (modules backend)
+ (public_name mirage-bootvar.backend)
+ (default_implementation mirage-bootvar.unix)
+ (virtual_modules backend))

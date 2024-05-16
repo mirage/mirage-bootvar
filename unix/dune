@@ -1,5 +1,4 @@
 (library
  (name mirage_bootvar_unix)
  (public_name mirage-bootvar.unix)
- (libraries mirage-bootvar.parse-argv)
- (implements mirage-bootvar))
+ (implements backend))
