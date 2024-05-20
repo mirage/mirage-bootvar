@@ -2,5 +2,5 @@
  (name mirage_bootvar_solo5)
  (public_name mirage-bootvar.solo5)
  (libraries mirage-solo5)
- (implements backend)
+ (implements mirage_bootvar_backend)
  (optional))
