@@ -1,3 +1,10 @@
+## v1.0.1 2024-05-20
+
+* Prefix all modules (backend / parse_argv) with Mirage_bootvar to avoid
+  potential conflicts (#2 @hannesm) -- observed while building
+  qubes-mirage-firewall which also depends on mirage-net-xen which provides
+  a module named Backend.
+
 ## v1.0.0 2024-05-16
 
 * parse-argv, mirage-bootvar-unix, mirage-bootvar-solo5, and mirage-bootvar-xen
