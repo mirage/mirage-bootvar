@@ -16,6 +16,7 @@
  *)
 
 let argv () =
-  match Parse_argv.parse (Backend.cmd_line ()) with
+  let cmdline = Mirage_bootvar_backend.cmd_line () in
+  match Mirage_bootvar_parse_argv.(parse cmdline) with
   | Ok l -> Array.of_list ("mirage" :: l)
   | Error s -> failwith s

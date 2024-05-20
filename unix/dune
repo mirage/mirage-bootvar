@@ -1,4 +1,4 @@
 (library
  (name mirage_bootvar_unix)
  (public_name mirage-bootvar.unix)
- (implements backend))
+ (implements mirage_bootvar_backend))

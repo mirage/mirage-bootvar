@@ -40,7 +40,7 @@ let test_parse () =
   List.iter
     (fun (input, expected) ->
       log "checking '%s'" input;
-      match Parse_argv.parse input with
+      match Mirage_bootvar_parse_argv.parse input with
       | Error e ->
           Printf.eprintf "Error - failed to parse: %s (input %s) " e input
       | Ok l ->
@@ -54,7 +54,9 @@ let test_parse () =
 let negative_test () =
   let str = "  \\" in
   log "Testing parse of %s (should fail)" str;
-  match Parse_argv.parse str with Ok _ -> assert false | Error _ -> ()
+  match Mirage_bootvar_parse_argv.parse str with
+  | Ok _ -> assert false
+  | Error _ -> ()
 
 let _ =
   Arg.parse
