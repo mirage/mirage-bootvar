@@ -1,10 +1,14 @@
-## v1.0.0
+## v1.0.0 2024-05-16
 
 * parse-argv, mirage-bootvar-unix, mirage-bootvar-solo5, and mirage-bootvar-xen
   have been merged into the single mirage-bootvar package. This uses dune
   variants to select the concrete implementation. The selection is done by
   the mirage tool which inspects the "target" option in `mirage configure`
   and outputs the desired ocamlfind sublibrary into the dune.build file.
+* The main logic is provided by the Mirage_bootvar module, while the
+  implementation to retrieve the boot parameters is provided by the dune variant
+  backend, and implemented by mirage-bootvar.unix, mirage-bootvar.solo5, and
+  mirage-bootvar.xen #1
 
 ## v0.3.0 (parse-argv) 2023-05-22
 
